@@ -1,0 +1,22 @@
+version: "3.6"
+services:
+  postgres:
+    image: postgres:13
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: postgrespassword
+      POSTGRES_USER: postgresuser
+      POSTGRES_DB: postgresdb
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  hasura:
+    image: hasura/graphql-engine:v2.12.1
+    ports:
+      - "8840:8080"
+    environment:
+      HASURA_GRAPHQL_DATABASE_URL: postgres://postgresuser:postgrespassword@postgres:5432/postgresdb
+      HASURA_GRAPHQL_ENABLE_CONSOLE: "true"
+      HASURA_GRAPHQL_ADMIN_SECRET: uW7EGYb4PCSyLKxHZ9qXAr
+    volumes:
+    - ./config.yaml:/hasura/config.yaml

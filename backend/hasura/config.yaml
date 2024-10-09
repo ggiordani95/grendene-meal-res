@@ -1,0 +1,7 @@
+version: 3
+endpoint: ${HASURA_ENDPOINT}
+admin_secret: ${HASURA_ADMIN_SECRET}
+metadata_directory: /hasura-metadata
+actions:
+  kind: synchronous
+  handler_webhook_baseurl: ${WEBHOOK_BASEURL}
